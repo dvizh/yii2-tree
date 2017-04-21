@@ -1,0 +1,31 @@
+{
+    "name": "dvizh/yii2-tree",
+    "description": "it's a simple widget to build tree by model",
+    "keywords": ["yii2", "yii 2", "widget", "tree"],
+    "homepage": "https://github.com/dvizh/yii2-tree",
+    "type": "yii2-extension",
+    "license": "BSD-3-Clause",
+    "support": {
+        "source": "https://github.com/dvizh/yii2-tree"
+    },
+    "authors": [
+        {
+            "name": "Ilya Pistol",
+            "email": "admin@nethammer.ru"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4.0",
+        "yiisoft/yii2": "*",
+        "yiisoft/yii2-bootstrap": "*"
+    },
+    "config": {
+        "process-timeout": 1800
+    },
+    "autoload": {
+        "psr-4": {
+            "dvizh\\tree\\": ""
+        }
+    }
+}
