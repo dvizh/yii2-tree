@@ -4,7 +4,7 @@
     "keywords": ["yii2", "yii 2", "widget", "tree"],
     "homepage": "https://github.com/dvizh/yii2-tree",
     "type": "yii2-extension",
-    "license": "BSD-3-Clause",
+    "license": "Apache",
     "support": {
         "source": "https://github.com/dvizh/yii2-tree"
     },
