@@ -9,13 +9,13 @@ Yii2-tree
 Выполнить команду
 
 ```
-php composer require dvizh/yii2-tree "*"
+php composer require dvizh/yii2-tree "@dev"
 ```
 
 Или добавить в composer.json
 
 ```
-"dvizh/yii2-tree": "*",
+"dvizh/yii2-tree": "@dev",
 ```
 
 И выполнить
