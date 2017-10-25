@@ -2,14 +2,14 @@
 use yii\helpers\Html;
 
 ?>
-<li class="main">
+<li class="children-li">
     <div class="row">
-        <div class="col-lg-6 col-xs-6" <?= $category['childs'] ? 'data-role="expand-tree"' : null ?>
+        <div class="col-lg-6 col-xs-6" <?= $category['childs'] ? 'data-role="expand-tree"' : '' ?>
              data-id="<?= $category[$settings->idField] ?>">
             <?= $settings->showId ? $category[$settings->idField] . '.' : null ?>
             <strong>
                 <?= $category[$settings->nameField] ?>
-                <span class="glyphicon <?= $category['childs'] ? 'glyphicon-chevron-down' : null ?>"></span>
+                <span class="glyphicon <?= $category['childs'] ? 'glyphicon-chevron-down' : '' ?>"></span>
             </strong>
         </div>
         <div class="col-lg-6 col-xs-6 dvizh-tree-right-col">

@@ -1,7 +1,7 @@
 {
     "name": "dvizh/yii2-tree",
-    "description": "it's a simple widget to build tree by model",
-    "keywords": ["yii2", "yii 2", "widget", "tree"],
+    "description": "it's a module to build tree by model",
+    "keywords": ["yii2", "yii 2", "widget", "tree", "module", "dvizh"],
     "homepage": "https://github.com/dvizh/yii2-tree",
     "type": "yii2-extension",
     "license": "Apache",
