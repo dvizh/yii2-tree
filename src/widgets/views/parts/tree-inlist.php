@@ -18,10 +18,10 @@ $idField = $settings['idField'];
                 <?php if ($settings['viewUrl']) { ?>
                     <?php if ($settings['viewUrlToSearch']) { ?>
                         <?= Html::a('<span class="glyphicon glyphicon-eye-open">', [
-                            $settings['viewUrl'],
-                            $settings['viewUrlModelName'] => [
-                                $settings['viewUrlModelField'] => $category[$idField]
-                            ]
+                                $settings['viewUrl'],
+                                $settings['viewUrlModelName'] => [
+                                        $settings['viewUrlModelField'] => $category[$idField]
+                                ]
                         ],
                             ['class' => 'btn btn-default', 'title' => 'Смотреть']); ?>
                     <?php } else { ?>

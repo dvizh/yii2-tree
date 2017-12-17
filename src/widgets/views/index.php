@@ -5,9 +5,10 @@ use yii\helpers\Url;
     <div class="categories-tree"
          data-role="tree"
          data-action-expand="<?= Url::to([$expandUrl]) ?>"
+         data-model="<?= $model ?>"
          data-action-delete="<?= Url::to([$deleteUrl]) ?>">
         <ul>
-            <?= $categoriesTree ?>
+            <?= $tree ?>
         </ul>
     </div>
 </div>

@@ -21,12 +21,14 @@ dvizh.tree = {
     deleteCategory: function () {
         var self = this,
             id = $(self).data('id'),
+            model = $(dvizh.tree.tree).data('model'),
             action = $(dvizh.tree.tree).data('action-delete');
 
         if (!!(id)) {
             var data = {};
 
             data.id = id;
+            data.model = model;
             dvizh.tree.sendData(data, action, self);
         }
     },
@@ -35,12 +37,14 @@ dvizh.tree = {
 
         var self = this,
             id = $(self).data('id'),
+            model = $(dvizh.tree.tree).data('model'),
             action = $(dvizh.tree.tree).data('action-expand');
 
         if (!!(id)) {
             var data = {};
 
             data.id = id;
+            data.model = model;
             dvizh.tree.sendData(data, action, self);
         }
 

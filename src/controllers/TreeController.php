@@ -48,15 +48,18 @@ class TreeController extends Controller
      */
     public function actionExpand()
     {
+        $data = \Yii::$app->request->post();
+
         $branch = null;
         $treeSettings = Yii::$app->treeSettings;
-        $data = \Yii::$app->request->post();
-        if (!isset($data[$treeSettings->idField]))
+        $modelSetting = $treeSettings->getSettingsModel($data['model']);
+        $fieldId = $modelSetting['idField'];
+        if (!isset($data[$fieldId]))
             return false;
 
-        $items = $treeSettings->getItems($data[$treeSettings->idField]);
+        $tree = $this->branchBuild($treeSettings->getItems($data[$fieldId]), $modelSetting);
 
-        return Html::tag('ul', $this->branchBuild($items, $treeSettings), ['class' => 'child', 'data-role' => 'child', 'data-id' => $data[$treeSettings->idField]]);
+        return Html::tag('ul', $tree, ['class' => 'child', 'data-role' => 'child', 'data-id' => $data[$fieldId]]);
 
     }
 

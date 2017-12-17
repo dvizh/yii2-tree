@@ -30,10 +30,10 @@ php composer update
     'components' => [
         'treeSettings' => [
             'class' => 'dvizh\tree\TreeSettings',
-            'model' => '\dvizh\shop\models\Category',
-            'showId' => true,
+            'models' => [
+                '\dvizh\shop\models\Category' => [], //массив с настройками. Если не чего не передать, будут установлены дефолтные настройки. Все настроки описаны ниже. 
+            ],   
         ],
-        //...
     ]
 ```
 
@@ -54,7 +54,7 @@ php composer update
 Во вью, где хотите вывести дерево, вызываете виджет:
 
 ```php
-<?=\dvizh\tree\widgets\Tree::widget();?>
+<?=\dvizh\tree\widgets\Tree::widget(['model' => $model::className()]);?>
 ```
 
 Все возможные настроки компонента(TreeSettings):

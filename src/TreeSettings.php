@@ -6,32 +6,67 @@ use yii\base\Component;
 
 class TreeSettings extends Component
 {
+    public $models = [];
+    public $currentModelName = null;
+    public $currentModelSettings = null;
+    private $defaultSettings = [
+        'updateUrl' => 'category/update',
+        'viewUrl' => '/shop/product/index',
+        'deleteUrl' => '/tree/tree/delete',
+        'expandUrl' => '/tree/tree/expand',
+        'viewUrlToSearch' => true,
+        'viewUrlModelName' => 'ProductSearch',
+        'viewUrlModelField' => 'category_id',
+        'orderField' => false,
+        'parentField' => 'parent_id',
+        'idField' => 'id',
+        'nameField' => 'name',
+        'view' => 'index',
+        'showId' => false,
+    ];
 
+    public function getSettingsModel($model)
+    {
 
-    public $updateUrl = 'category/update';
-    public $viewUrl = '/shop/product/index';
-    public $deleteUrl = '/tree/tree/delete';
-    public $expandUrl = '/tree/tree/expand';
-    public $viewUrlToSearch = true;
-    public $viewUrlModelName = 'ProductSearch';
-    public $viewUrlModelField = 'category_id';
-    public $orderField = false;
-    public $parentField = 'parent_id';
-    public $idField = 'id';
-    public $nameField = 'name';
-    public $view = 'index';
-    public $showId = false;
-    public $model = null;
+        $this->setModel($model);
+        $settingsModel = null;
+        $model = $this->getModel($model);
+        foreach ($this->defaultSettings as $property => $value) {
+            if(isset($model[$property])) {
+                $settingsModel[$property] = $model[$property];
+            } else {
+                $settingsModel[$property] = $value;
+            }
+        }
+        $this->setModelSettings($settingsModel);
 
+        return $settingsModel;
+    }
+    private function setModel($modelName)
+    {
+        $this->currentModelName = $modelName;
+    }
+
+    private function setModelSettings($settingsModel)
+    {
+        $this->currentModelSettings = $settingsModel;
+    }
+
+    private function getModel()
+    {
+        return $this->models[$this->currentModelName];
+    }
     /**
      * @param $id
      * @return mixed
      */
     public function getItems($id)
     {
-        $items = $this->findModel($id);
-        foreach ($items as $number => $item)
-            $items[$number]['childs'] =  $item['childs'] = $this->isChildren($item[$this->idField]);
+
+        $items = $this->findModels($id);
+        foreach ($items as $number => $item) {
+            $items[$number]['childs'] = $this->isChildren($item[$this->currentModelSettings['idField']]);
+        }
 
         return $items;
     }
@@ -40,16 +75,22 @@ class TreeSettings extends Component
      * @param $id
      * @return mixed
      */
-    protected function findModel($id)
+    protected function findModels($id)
     {
-        $model = $this->model;
-        if($this->orderField) {
-            $list = $model::find()->where([$this->parentField => $id])->orderBy($this->orderField)->asArray()->all();
-        } else {
-            $list = $model::find()->where([$this->parentField => $id])->asArray()->all();
+        $query = $this->findModel($id);
+
+        if($this->currentModelSettings['orderField']) {
+            return $query->orderBy($this->currentModelSettings['orderField'])->asArray()->all();
         }
 
-        return $list;
+        return $query->asArray()->all();
+    }
+
+    protected function findModel($id)
+    {
+        $model = $this->currentModelName;
+
+        return $model::find()->where([$this->currentModelSettings['parentField']=> $id]);
     }
 
     /**
@@ -58,8 +99,6 @@ class TreeSettings extends Component
      */
     protected function isChildren($id)
     {
-        $model = $this->model;
-
-        return $model::find()->where([$this->parentField => $id])->exists();
+        return $this->findModel($id)->exists();
     }
 }

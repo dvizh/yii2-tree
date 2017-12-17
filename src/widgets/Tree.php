@@ -5,8 +5,13 @@ use yii;
 
 class Tree extends \yii\base\Widget
 {
+    public $model = null;
+
     public function init()
     {
+        if (!$this->model) {
+            throw new \Exception('You need to transfer the model!');
+        }
         parent::init();
         \dvizh\tree\assets\WidgetAsset::register($this->getView());
     }
@@ -17,13 +22,14 @@ class Tree extends \yii\base\Widget
     public function run()
     {
         $treeSettings = Yii::$app->treeSettings;
-        $items = $treeSettings->getItems(null);
-        $tree = $this->branchBuild($items, $treeSettings);
+        $modelSetting = $treeSettings->getSettingsModel($this->model);
+        $tree = $this->branchBuild($treeSettings->getItems(null), $modelSetting);
 
-        return $this->render($treeSettings->view, [
-            'categoriesTree' => $tree,
-            'expandUrl' => $treeSettings->expandUrl,
-            'deleteUrl' => $treeSettings->deleteUrl,
+        return $this->render($modelSetting['view'], [
+            'tree' => $tree,
+            'model' => $this->model,
+            'expandUrl' => $modelSetting['expandUrl'],
+            'deleteUrl' => $modelSetting['deleteUrl'],
         ]);
     }
 
@@ -36,7 +42,7 @@ class Tree extends \yii\base\Widget
     {
         $branch = null;
         foreach ($items as $item) {
-            $branch .= $this->render('parts/tree_inlist.php', ['category' => $item, 'settings' => $settings]);
+            $branch .= $this->render('parts/tree-inlist', ['category' => $item, 'settings' => $settings]);
         }
 
         return $branch;
