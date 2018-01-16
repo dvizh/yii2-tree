@@ -25,6 +25,17 @@ class TreeSettings extends Component
         'showId' => false,
     ];
 
+    public function getSettingProperty($property, $model)
+    {
+        $settings = $this->getSettingsModel($model);
+
+        if(isset($settings[$property])) {
+            return $settings[$property];
+        }
+
+        return null;
+    }
+
     public function getSettingsModel($model)
     {
 

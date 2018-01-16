@@ -1,4 +1,5 @@
 <?php
+
 namespace dvizh\tree\controllers;
 
 use yii;
@@ -35,12 +36,19 @@ class TreeController extends Controller
      */
     public function actionDelete()
     {
-        $data = \Yii::$app->request->post();
+        $data = Yii::$app->request->post();
         $treeSettings = Yii::$app->treeSettings;
-        if (isset($data[$treeSettings->idField]))
-            $this->deleteCategory($data['id'], $treeSettings->model);
+        $model = $data['model'];
+        $field = $treeSettings->getSettingProperty('idField', $model);
+        $id = $data['id'];
 
-        return 'delete';
+        if ($id && $field && $model) {
+            $this->deleteCategory($id, $model, $field);
+
+            return 'delete';
+        }
+
+        return false;
     }
 
     /**
@@ -48,7 +56,7 @@ class TreeController extends Controller
      */
     public function actionExpand()
     {
-        $data = \Yii::$app->request->post();
+        $data = Yii::$app->request->post();
 
         $branch = null;
         $treeSettings = Yii::$app->treeSettings;

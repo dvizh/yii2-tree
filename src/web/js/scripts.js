@@ -26,10 +26,13 @@ dvizh.tree = {
 
         if (!!(id)) {
             var data = {};
+            var confirmation = confirm("Удалить данный элемент?");
 
-            data.id = id;
-            data.model = model;
-            dvizh.tree.sendData(data, action, self);
+            if(confirmation === true) {
+                data.id = id;
+                data.model = model;
+                dvizh.tree.sendData(data, action, self);
+            }
         }
     },
 

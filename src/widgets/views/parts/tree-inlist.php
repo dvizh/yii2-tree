@@ -20,7 +20,7 @@ $idField = $settings['idField'];
                         <?= Html::a('<span class="glyphicon glyphicon-eye-open">', [
                                 $settings['viewUrl'],
                                 $settings['viewUrlModelName'] => [
-                                        $settings['viewUrlModelField'] => $category[$idField]
+                                    $settings['viewUrlModelField'] => $category[$idField]
                                 ]
                         ],
                             ['class' => 'btn btn-default', 'title' => 'Смотреть']); ?>
@@ -35,7 +35,7 @@ $idField = $settings['idField'];
                     'class' => 'glyphicon glyphicon-trash',
                     'data-role' => 'delete-tree',
                     'data-id' => $category[$idField]
-                ]), ['class' => 'btn btn-default', 'data-confirm' => 'Вы уверены, что хотите удалить?']); ?>
+                ]), ['class' => 'btn btn-default']); ?>
             </div>
         </div>
     </div>
