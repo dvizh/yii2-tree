@@ -35,7 +35,7 @@ $idField = $settings['idField'];
                     'class' => 'glyphicon glyphicon-trash',
                     'data-role' => 'delete-tree',
                     'data-id' => $category[$idField]
-                ]), ['class' => 'btn btn-default', 'data-confirm' => 'Вы уверены, что хотите удалить?']); ?>
+                ]), ['class' => 'btn btn-default']); ?>
             </div>
         </div>
     </div>

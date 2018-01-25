@@ -10,7 +10,7 @@ class TreeSettings extends Component
     public $currentModelName = null;
     public $currentModelSettings = null;
     private $defaultSettings = [
-        'updateUrl' => 'category/update',
+        'updateUrl' => '/shop/category/update',
         'viewUrl' => '/shop/product/index',
         'deleteUrl' => '/tree/tree/delete',
         'expandUrl' => '/tree/tree/expand',
