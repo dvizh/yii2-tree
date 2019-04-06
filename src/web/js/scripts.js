@@ -69,7 +69,7 @@ dvizh.tree = {
             function (response) {
                 if (response && response != 'delete') {
                     if ($(self).parents('li:first').hasClass('main')) {
-                        $(self).parents('.main').append(response);
+                        $(self).closest('.main').append(response);
                     } else {
                         $(self).parents('.children-li').append(response);
                     }
